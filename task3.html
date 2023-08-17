@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 3</title>
+    <style>
+      body {
+        background-color: lightgray;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .header {
+        max-width: 1425px;
+        margin: 0 auto;
+        background-color: rgb(31, 199, 131);
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 30px;
+      }
+      .header > p {
+        font-size: 24px;
+      }
+      .content {
+        max-width: 950px;
+        margin: 10px auto;
+        background-color: rgb(31, 199, 131);
+        border-radius: 10px;
+        text-align: center;
+        padding: 5px 0;
+        font-size: 24px;
+      }
+
+      .btn {
+        max-width: 300px;
+        margin: 30px auto;
+      }
+      .button {
+        display: block;
+        text-decoration: none;
+        color: black;
+        background-color: rgb(31, 199, 131);
+        margin: 15px 25px;
+        text-align: center;
+        font-size: 22px;
+        padding: 10px 20px;
+        border-radius: 7px;
+      }
+      .button:hover {
+        background-color: rgb(63, 112, 210);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div>Задача 3</div>
+      <p>Об’єкт “Фірма” (використати члени-класи)</p>
+    </div>
+    <div class="content">
+      <p>Відповідь до задачі:</p>
+      <script>
+        class Company {
+          #companyName
+
+          constructor(companyName, month, year) {
+            this.CompanyName = companyName
+            this.monthEstablishment = month
+            this.yearEstablishment = year
+          }
+
+          get CompanyName() {
+            return this.#companyName
+          }
+          set CompanyName(newName) {
+            this.#companyName = newName
+          }
+
+          ageCompany(currentYear) {
+            return currentYear - this.yearEstablishment
+          }
+
+          toString() {
+            return `Компанія ${this.#companyName}<br> Заснована в ${
+              this.monthEstablishment
+            } місяці ${this.yearEstablishment} року`
+          }
+        }
+
+        class Address {
+          #country
+
+          constructor(country, city, street, houseNumber) {
+            this.Country = country
+            this.city = city
+            this.street = street
+            this.houseNumber = houseNumber
+          }
+
+          get Country() {
+            return this.#country
+          }
+          set Country(newValue) {
+            this.#country = newValue
+          }
+
+          branchAddressesInCity(city) {
+            if (city !== 'Київ')
+              throw new Error('Помилка, у вказаному місті філії немає')
+            return `Вулиця ${this.street}, будинок №${this.houseNumber}<br>`
+          }
+
+          toString() {
+            return `Адреса компанії: ${this.#country}, місто ${
+              this.city
+            }, вулиця ${this.street}, будинок №${this.houseNumber}<br>`
+          }
+        }
+
+        class Service {
+          #serviceName
+
+          constructor(name, price, deadline) {
+            this.ServiceName = name
+            this.price = price
+            this.deadline = deadline
+          }
+
+          get ServiceName() {
+            return this.#serviceName
+          }
+          set ServiceName(newValue) {
+            this.#serviceName = newValue
+          }
+
+          showService(userPrice, userDeadline) {
+            if (userPrice > this.price || userDeadline > this.deadline)
+              throw new Error('Немає такої послуги')
+            return this.#serviceName
+          }
+          toString() {
+            return `Послуга: ${this.#serviceName}<br> Вартість: ${
+              this.price
+            } грн<br> Термін виконання: ${this.deadline} днів <br>`
+          }
+        }
+
+        let createCompany = new Company('Авто-підбір', 10, 2013)
+        document.write(`${createCompany.toString()}<br>`)
+        document.write(
+          `Компанія існує ${createCompany.ageCompany(2023)} років <br>`
+        )
+
+        let createAddress = new Address(
+          'Україна',
+          'Київ',
+          'Дніпровська набережна',
+          37
+        )
+        document.write(`${createAddress.toString()}`)
+
+        let createService = new Service('Підбір автомобіля під ключ', 1500, 14)
+        document.write(`${createService.toString()}`)
+      </script>
+    </div>
+    <div class="btn">
+      <a class="button" href="./index.html">На головну</a>
+    </div>
+  </body>
+</html>

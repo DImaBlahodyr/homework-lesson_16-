@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 2</title>
+    <style>
+      body {
+        background-color: lightgray;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .header {
+        max-width: 1425px;
+        margin: 0 auto;
+        background-color: rgb(31, 199, 131);
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 30px;
+      }
+      .header > p {
+        font-size: 24px;
+      }
+      .content {
+        max-width: 950px;
+        margin: 10px auto;
+        background-color: rgb(31, 199, 131);
+        border-radius: 10px;
+        text-align: center;
+        padding: 5px 0;
+        font-size: 24px;
+      }
+
+      .btn {
+        max-width: 300px;
+        margin: 30px auto;
+      }
+      .button {
+        display: block;
+        text-decoration: none;
+        color: black;
+        background-color: rgb(31, 199, 131);
+        margin: 15px 25px;
+        text-align: center;
+        font-size: 22px;
+        padding: 10px 20px;
+        border-radius: 7px;
+      }
+      .button:hover {
+        background-color: rgb(63, 112, 210);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div>Задача 2</div>
+      <p>
+        Створити клас TMoney для роботи з грошовими сумами. Сума повинна
+        зберігатися у вигляді доларового еквіваленту. Реалізувати методи
+        додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та
+        визначення курсу долара, при якому сума у гривнях збільшиться на 100.
+        Курс долара зберігати в окремому полі.
+      </p>
+    </div>
+    <div class="content">
+      <p>Відповідь до задачі:</p>
+      <script>
+        class TManey {
+          #dollarBalance
+
+          constructor(grnAccountBalance, dollarRate) {
+            this.dollarRate = dollarRate
+            this.Balance = grnAccountBalance
+          }
+
+          get Balance() {
+            return this.#dollarBalance * this.dollarRate
+          }
+
+          set Balance(grnSum) {
+            if (grnSum < 0) throw new Error('Баланс не може бути менше нуля!')
+            this.#dollarBalance = grnSum / this.dollarRate
+          }
+
+          balanceReplenishmentMethod(grnSum) {
+            if (grnSum < 0)
+              throw new Error('Сума поповнення не може бути менше нуля!')
+            this.Balance += grnSum
+          }
+
+          balanceWithdrowalMethod(grnSum) {
+            if (grnSum < 0)
+              throw new Error('Сума зняття не може бути менше нуля!')
+            if (grnSum > this.Balance) throw new Error('Недостатньо коштів')
+            this.Balance -= grnSum
+          }
+
+          getTarget100Rate() {
+            return (this.Balance + 100) / this.#dollarBalance
+          }
+
+          toString() {
+            return `Курс: ${this.dollarRate}<br>
+                Баланс: ${this.#dollarBalance.toFixed(2)}<br>`
+          }
+        }
+
+        let createBalance = new TManey(70000, 36)
+        document.write(`${createBalance.toString()}`)
+        createBalance.balanceReplenishmentMethod(3000)
+        document.write(`${createBalance.toString()}`)
+        createBalance.balanceWithdrowalMethod(1225)
+        document.write(`${createBalance.toString()}`)
+      </script>
+    </div>
+    <div class="btn">
+      <a class="button" href="./index.html">На головну</a>
+    </div>
+  </body>
+</html>
